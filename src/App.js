@@ -34,13 +34,16 @@ import { createStore } from "redux";
 // }
 //= separate reducer
 import reducer from "./reducer";
+import { Provider } from "react-redux";
 import { CLEAR_CART, DECREASE, INCREASE } from "./actions";
 
 // store.getState()
 
 // initial store
 const initialStore = {
-  count: 34,
+  cart: cartItems,
+  total: 0,
+  amount: 5,
 };
 const store = createStore(reducer, initialStore);
 console.log("store.getState", store.getState());
@@ -49,24 +52,24 @@ console.log("store.getState", store.getState());
 // actions (objects) - MUST HAVE TYPE PROPERTY - what kind of action
 // DONOT MUTATE THE STATE - redux build on IMMUTABILITY (copy)
 // copy 5 times
-store.dispatch({ type: DECREASE });
-store.dispatch({ type: DECREASE });
-store.dispatch({ type: DECREASE });
-store.dispatch({ type: DECREASE });
-store.dispatch({ type: DECREASE });
-store.dispatch({ type: INCREASE });
-store.dispatch({ type: CLEAR_CART });
+// store.dispatch({ type: DECREASE });
+// store.dispatch({ type: DECREASE });
+// store.dispatch({ type: DECREASE });
+// store.dispatch({ type: DECREASE });
+// store.dispatch({ type: DECREASE });
+// store.dispatch({ type: INCREASE });
+// store.dispatch({ type: CLEAR_CART });
 console.log("store.getState", store.getState());
 
 function App() {
   // cart setup
 
   return (
-    <main>
-      <Navbar cart={store.getState()} />
-      {/* <Navbar /> */}
+    <Provider store={store}>
+      {/* <Navbar cart={store.getState()} /> */}
+      <Navbar />
       <CartContainer cart={cartItems} />
-    </main>
+    </Provider>
   );
 }
 
