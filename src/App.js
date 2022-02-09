@@ -13,6 +13,27 @@ import cartItems from "./cart-items";
 // return updated or old state
 
 import { createStore } from "redux";
+// reducer
+// function reducer(state, action) {
+//   console.log({ state, action });
+//   if (action.type === DECREASE) {
+//     // mutate
+//     // state.count = state.count - 1
+//     // immutate
+//     return { ...state, count: state.count - 1 };
+//   }
+//   if (action.type === INCREASE) {
+//     return { ...state, count: state.count + 1 };
+//   }
+//   if (action.type === "RESET") {
+//     return { ...state, count: 0 };
+//   }
+//   //& always need return state
+//   // if nothing return, it will return undefined state
+//   return state;
+// }
+//= separate reducer
+import reducer from "./reducer";
 import { CLEAR_CART, DECREASE, INCREASE } from "./actions";
 
 // store.getState()
@@ -21,25 +42,6 @@ import { CLEAR_CART, DECREASE, INCREASE } from "./actions";
 const initialStore = {
   count: 34,
 };
-// reducer
-function reducer(state, action) {
-  console.log({ state, action });
-  if (action.type === DECREASE) {
-    // mutate
-    // state.count = state.count - 1
-    // immutate
-    return { ...state, count: state.count - 1 };
-  }
-  if (action.type === INCREASE) {
-    return { ...state, count: state.count + 1 };
-  }
-  if (action.type === "RESET") {
-    return { ...state, count: 0 };
-  }
-  //& always need return state
-  // if nothing return, it will return undefined state
-  return state;
-}
 const store = createStore(reducer, initialStore);
 console.log("store.getState", store.getState());
 
