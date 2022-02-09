@@ -42,7 +42,7 @@ import { CLEAR_CART, DECREASE, INCREASE } from "./actions";
 // initial store
 const initialStore = {
   cart: cartItems,
-  total: 0,
+  total: 123,
   amount: 5,
 };
 const store = createStore(reducer, initialStore);
@@ -68,7 +68,8 @@ function App() {
     <Provider store={store}>
       {/* <Navbar cart={store.getState()} /> */}
       <Navbar />
-      <CartContainer cart={cartItems} />
+      {/* <CartContainer cart={cartItems} /> */}
+      <CartContainer />
     </Provider>
   );
 }
