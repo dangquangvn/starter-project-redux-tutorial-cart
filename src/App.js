@@ -51,7 +51,10 @@ const initialStore = {
   total: 123,
   amount: 0,
 };
-const store = createStore(reducer, initialStore);
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 console.log("store.getState", store.getState());
 
 // dispatch method - send actions to the store
