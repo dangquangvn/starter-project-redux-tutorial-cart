@@ -21,7 +21,7 @@ const Navbar = ({ amount }) => {
 
 // export default Navbar;
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   // result: all state in store
   return {
     // props A : state.B

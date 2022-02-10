@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // components
 import Navbar from "./components/Navbar";
 import CartContainer from "./components/CartContainer";
@@ -35,7 +35,13 @@ import { createStore } from "redux";
 //= separate reducer
 import reducer from "./reducer";
 import { Provider } from "react-redux";
-import { CLEAR_CART, DECREASE, INCREASE } from "./actions";
+import {
+  CLEAR_CART,
+  DECREASE,
+  GET_AMOUNT,
+  GET_TOTAL,
+  INCREASE,
+} from "./actions";
 
 // store.getState()
 
@@ -43,7 +49,7 @@ import { CLEAR_CART, DECREASE, INCREASE } from "./actions";
 const initialStore = {
   cart: cartItems,
   total: 123,
-  amount: 5,
+  amount: 0,
 };
 const store = createStore(reducer, initialStore);
 console.log("store.getState", store.getState());
@@ -60,9 +66,13 @@ console.log("store.getState", store.getState());
 // store.dispatch({ type: INCREASE });
 // store.dispatch({ type: CLEAR_CART });
 console.log("store.getState", store.getState());
+console.log("store.cart", store.getState().amount);
 
 function App() {
   // cart setup
+  // useEffect(() => {
+  //   store.dispatch({ type: GET_AMOUNT });
+  // }, []);
 
   return (
     <Provider store={store}>
