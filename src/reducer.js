@@ -83,9 +83,29 @@ function reducer(state, { type, payload }) {
       });
       return { ...state, cart: tempCart };
     }
-    case CHANGE_AMOUNT:
-      console.log("change amount reducer");
-      return { ...state };
+    case CHANGE_AMOUNT: {
+      const tempCart = state.cart.map((cartItem) => {
+        if (cartItem.id === payload.id) {
+          let newAmount = cartItem.amount;
+          if (payload.value === "inc") {
+            newAmount = checkNumber({
+              value: cartItem.amount + 1,
+              min: 0,
+            });
+          }
+          else if (payload.value === "dec") {
+            newAmount = checkNumber({
+              value: cartItem.amount - 1,
+              min: 0,
+            });
+          }
+          return { ...cartItem, amount: newAmount };
+        }
+        return cartItem;
+      });
+      return { ...state, cart: tempCart };
+    }
+
     case REMOVE: {
       console.log("remove reducer");
       const tempCart = state.cart.filter((item) => item.id !== payload.id);

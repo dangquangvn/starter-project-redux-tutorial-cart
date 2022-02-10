@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { DECREASE, INCREASE, REMOVE } from "../actions";
+import { CHANGE_AMOUNT, DECREASE, INCREASE, REMOVE } from "../actions";
 
 const CartItem = ({
   id,
@@ -11,6 +11,7 @@ const CartItem = ({
   remove,
   increase,
   decrease,
+  changeAmount,
 }) => {
   return (
     <div className='cart-item'>
@@ -31,7 +32,8 @@ const CartItem = ({
         {/* increase amount */}
         <button
           className='amount-btn amount-btn__inc'
-          onClick={() => increase()}
+          // onClick={() => increase()}
+          onClick={() => changeAmount("inc")}
         >
           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'>
             <path d='M10.707 7.05L10 6.343 4.343 12l1.414 1.414L10 9.172l4.243 4.242L15.657 12z' />
@@ -44,7 +46,8 @@ const CartItem = ({
           className='amount-btn amount-btn__dec'
           // onClick={() => decrease()}
           onClick={() => {
-            amount === 1 ? remove() : decrease();
+            // amount === 1 ? remove() : decrease();
+            amount === 1 ? remove() : changeAmount("dec");
           }}
         >
           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'>
@@ -71,6 +74,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     remove: () => dispatch({ type: REMOVE, payload: { id } }),
     increase: () => dispatch({ type: INCREASE, payload: { id } }),
     decrease: () => dispatch({ type: DECREASE, payload: { id, amount } }),
+    changeAmount: (value) =>
+      dispatch({ type: CHANGE_AMOUNT, payload: { id, value } }),
   };
 };
 // export default connect(mapStateToProps)(CartItem);
