@@ -34,23 +34,38 @@ function reducer(state, { type, payload }) {
   switch (type) {
     case CLEAR_CART:
       return { ...state, cart: [], total: 0, amount: 0 };
+    //= decrease ver1
+    // case DECREASE: {
+    //   console.log("decrease reducer", payload.id);
+    //   let tempCart = [];
+    //   if (payload.amount === 1) {
+    //     tempCart = state.cart.filter((cartItem) => cartItem.id !== payload.id);
+    //   } else {
+    //     tempCart = state.cart.map((cartItem) => {
+    //       if (cartItem.id === payload.id) {
+    //         let newAmount = checkNumber({
+    //           value: cartItem.amount - 1,
+    //           min: 0,
+    //         });
+    //         return { ...cartItem, amount: newAmount };
+    //       }
+    //       return cartItem;
+    //     });
+    //   }
+    //   return { ...state, cart: tempCart };
+    // }
+    //= decrease ver2
     case DECREASE: {
-      console.log("decrease reducer", payload.id);
-      let tempCart = [];
-      if (payload.amount === 1) {
-        tempCart = state.cart.filter((cartItem) => cartItem.id !== payload.id);
-      } else {
-        tempCart = state.cart.map((cartItem) => {
-          if (cartItem.id === payload.id) {
-            let newAmount = checkNumber({
-              value: cartItem.amount - 1,
-              min: 0,
-            });
-            return { ...cartItem, amount: newAmount };
-          }
-          return cartItem;
-        });
-      }
+      let tempCart = state.cart.map((cartItem) => {
+        if (cartItem.id === payload.id) {
+          let newAmount = checkNumber({
+            value: cartItem.amount - 1,
+            min: 0,
+          });
+          return { ...cartItem, amount: newAmount };
+        }
+        return cartItem;
+      });
       return { ...state, cart: tempCart };
     }
     case INCREASE: {
