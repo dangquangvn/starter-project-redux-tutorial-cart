@@ -7,6 +7,7 @@ import {
   INCREASE,
   REMOVE,
 } from "./actions";
+import cartItems from "./cart-items";
 import { checkNumber } from "./helper";
 
 //= method 1: using if statement
@@ -29,8 +30,14 @@ import { checkNumber } from "./helper";
 //   return state;
 // }
 
+const initialStore = {
+  cart: cartItems,
+  total: 123,
+  amount: 0,
+};
+
 //= method 2: using switch statement
-function reducer(state, { type, payload }) {
+function reducer(state = initialStore, { type, payload }) {
   switch (type) {
     case CLEAR_CART:
       return { ...state, cart: [], total: 0, amount: 0 };
@@ -92,8 +99,7 @@ function reducer(state, { type, payload }) {
               value: cartItem.amount + 1,
               min: 0,
             });
-          }
-          else if (payload.value === "dec") {
+          } else if (payload.value === "dec") {
             newAmount = checkNumber({
               value: cartItem.amount - 1,
               min: 0,
